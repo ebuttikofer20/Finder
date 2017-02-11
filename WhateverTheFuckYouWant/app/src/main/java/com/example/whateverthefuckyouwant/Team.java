@@ -27,7 +27,7 @@ public class Team {
     }
     //Starting Card/"screen"
     public Team() {
-        teamName = "Ready to play?";
+        teamName = "Ready to play?\n gdskjdhgjhdfkjh";
         teamNumber = "Yes";
     }
     //checks if teamNumber is equal to the teamNumber in the API

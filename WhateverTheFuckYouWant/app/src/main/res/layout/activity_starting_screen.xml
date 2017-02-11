@@ -28,14 +28,6 @@
         android:layout_marginTop="13dp"
         android:id="@+id/button3" />
 
-    <Button
-        android:text="About"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button5"
-        android:layout_below="@+id/button4"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:text="Eric's awesome game that you should play"
         android:layout_width="wrap_content"
@@ -46,11 +38,20 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-       android:text="Random Button"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="110dp"
-       android:id="@+id/button4"
+        android:text="About"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5"
+        android:layout_marginTop="89dp"
         android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true" />
+
+    <ToggleButton
+        android:id="@+id/togglebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="Sound On"
+        android:textOff="Sound Off"/>
+
+
 </RelativeLayout>

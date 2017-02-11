@@ -2,6 +2,7 @@ package com.example.whateverthefuckyouwant;
 
 //Imports, in case you couldn't tell
 
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -97,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     int points = -1;
 
+    
+    boolean mute = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -106,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
         myTextView = (TextView) findViewById(R.id.Lives);
         myTextView.setText("");
+
+
 
         // Initialize credentials and service object.
         mCredential = GoogleAccountCredential.usingOAuth2(
@@ -173,8 +179,16 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 if(t.checkAnswer(s)) {
                     Toast.makeText(MainActivity.this, "Correct!", Toast.LENGTH_SHORT).show();
                     points++;
+                        if(mute = true) {
+                            MediaPlayer songOnClick = MediaPlayer.create(MainActivity.this, R.raw.correct);
+                            songOnClick.start();
+                        }
                 } else {
                     Toast.makeText(MainActivity.this, "Incorrect!", Toast.LENGTH_SHORT).show();
+                        if(mute = true) {
+                            MediaPlayer songOnClick = MediaPlayer.create(MainActivity.this, R.raw.wrong);
+                            songOnClick.start();
+                        }
                 }
 
                 if(first) {
@@ -196,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 } else if (cardNumber == 100) {
                     Toast.makeText(getApplicationContext(), "You Reached 100 Points Without Losing! You're A Genius!", Toast.LENGTH_SHORT).show();
                 }
-                myTextView.setText("Points: " + points);
+                myTextView.setText("Points: " + points +"");
             }
         };
 
