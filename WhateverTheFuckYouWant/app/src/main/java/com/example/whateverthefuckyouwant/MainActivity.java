@@ -98,8 +98,12 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     int points = -1;
 
-    
-    boolean mute = true;
+    private MediaPlayer mp;
+
+    boolean muteOrNaw;
+
+    MediaPlayer right;
+    MediaPlayer wrong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +111,14 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        muteOrNaw= pref.getBoolean("muteOrNaw", true);
+
+        right = MediaPlayer.create(MainActivity.this, R.raw.correct);
+        wrong = MediaPlayer.create(MainActivity.this, R.raw.wrong);
 
         myTextView = (TextView) findViewById(R.id.Lives);
         myTextView.setText("");
-
 
 
         // Initialize credentials and service object.
@@ -171,25 +179,23 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 //Adds some nice animation effect
                 mAdapter.notifyItemRemoved(mRecyclerView.getChildAdapterPosition(viewHolder.itemView));
 
-
-
-
+                MediaPlayer mp;
 
                 //Sends a toast message saying "correct" or "incorrect"
                 if(t.checkAnswer(s)) {
                     Toast.makeText(MainActivity.this, "Correct!", Toast.LENGTH_SHORT).show();
-                    points++;
-                        if(mute = true) {
-                            MediaPlayer songOnClick = MediaPlayer.create(MainActivity.this, R.raw.correct);
-                            songOnClick.start();
-                        }
+                         points++;
+                         mp = right;
                 } else {
                     Toast.makeText(MainActivity.this, "Incorrect!", Toast.LENGTH_SHORT).show();
-                        if(mute = true) {
-                            MediaPlayer songOnClick = MediaPlayer.create(MainActivity.this, R.raw.wrong);
-                            songOnClick.start();
-                        }
+                         mp = wrong;
                 }
+
+                if(muteOrNaw) {
+                    mp.start();
+                }
+
+                mp = null;
 
                 if(first) {
                     //This make the recyclerView shuffle
